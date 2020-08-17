@@ -1,0 +1,16 @@
+wsrep_provider=/usr/lib/libgalera_smm.so
+
+wsrep_cluster_name=pxc-cluster
+wsrep_cluster_address=gcomm://10.32.236.121,10.32.236.120
+
+wsrep_node_name=pxc1
+wsrep_node_address=10.32.236.121
+
+wsrep_sst_method=xtrabackup-v2
+wsrep_sst_auth=sstuser:2HT70XS5B3A8r1K
+
+pxc_strict_mode=ENFORCING
+
+binlog_format=ROW
+default_storage_engine=InnoDB
+innodb_autoinc_lock_mode=2

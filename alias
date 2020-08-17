@@ -1,0 +1,2 @@
+alias ns="forever start -c 'node --expose-gc --max_old_space_size=1024'"
+alias pp="pm2 start --node-args='--max_old_space_size=1024 --nouse-idle-notification --max-new-space-size=2048'"

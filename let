@@ -1,0 +1,11 @@
+firewall-cmd --permanent --zone=public --add-rich-rule='
+  rule family="ipv4"
+  source address="0.0.0.0/0"
+  port protocol="tcp" port="80" accept'
+firewall-cmd --reload
+
+firewall-cmd --permanent --zone=public --add-rich-rule='
+  rule family="ipv4"
+  source address="0.0.0.0/443"
+  port protocol="tcp" port="9200" accept'
+firewall-cmd --reload

@@ -1,0 +1,13 @@
+yum install mariadb-devel mariadb-libs -y
+yum install -y make gcc gcc-c++ wget openssl-devel libevent libevent-devel
+yum install -y openssl-devel libevent libevent-devel
+cd /opt/ && wget http://turnserver.open-sys.org/downloads/v4.5.1.1/turnserver-4.5.1.1.tar.gz
+cd /opt && tar zxf turnserver-4.5.1.1.tar.gz
+cd /opt/turnserver-4.5.1.1/ && ./configure && make && make install
+mkdir /etc/turnserver
+cp /opt/turnserver-4.5.1.1/bin/turnserver /etc/turnserver/
+wget https://pastebin.com/raw/gVZpnU5x -O /etc/turnserver/turnserver.conf
+wget https://pastebin.com/raw/sFbVdru8 -O /usr/lib/systemd/system/turn.service
+systemctl daemon-reload
+systemctl enable turn
+systemctl start turn

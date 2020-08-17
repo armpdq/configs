@@ -1,0 +1,259 @@
+admin:
+  access_log_path: /tmp/admin_access.log
+  address:
+    socket_address: { address: 0.0.0.0, port_value: 9901 }
+static_resources:
+  listeners:
+  - address:
+      socket_address:
+        address: 0.0.0.0
+        port_value: 80
+    filter_chains:
+    - filters:
+      - name: envoy.http_connection_manager
+        config:
+          codec_type: auto
+          stat_prefix: ingress_http
+          route_config:
+            virtual_hosts:
+            - name: backend
+              domains:
+              - "*"
+              routes:
+              - match:
+                  prefix: "/"
+                route:
+                  cluster: medianati5_service
+          use_remote_address: true
+          http_filters:
+          - name: envoy.router
+            config: {}
+  - address:
+      socket_address:
+        address: 0.0.0.0
+        port_value: 443
+    filter_chains:
+    - filters:
+      - name: envoy.http_connection_manager
+        config:
+          codec_type: auto
+          stat_prefix: ingress_http
+          route_config:
+            name: local_route
+            virtual_hosts:
+            - name: backend
+              domains:
+              - "*"
+              routes:
+              - match:
+                  prefix: "/"
+                route:
+                  cluster: medianati5_service
+          use_remote_address: true
+          http_filters:
+          - name: envoy.router
+            config: {}
+      tls_context:
+        common_tls_context:
+          tls_certificates:
+            - certificate_chain:
+                filename: "/etc/nginx/ssl/medianati_com.crt"
+              private_key:
+                filename: "/etc/nginx/ssl/medianati_com_key.txt"
+  clusters:
+  - name: medianati5_service
+    connect_timeout: 0.25s
+    type: STATIC
+    lb_policy: ROUND_ROBIN
+    load_assignment:
+      cluster_name: medianati5_service
+      endpoints:
+      - lb_endpoints:
+        - endpoint:
+            address:
+              pipe:
+                path: /var/run/node1.sock
+        - endpoint:
+            address:
+              pipe:
+                path: /var/run/node2.sock
+        - endpoint:
+            address:
+              pipe:
+                path: /var/run/node3.sock
+        - endpoint:
+            address:
+              pipe:
+                path: /var/run/node4.sock
+        - endpoint:
+            address:
+              pipe:
+                path: /var/run/node5.sock
+        - endpoint:
+            address:
+              pipe:
+                path: /var/run/node6.sock
+        - endpoint:
+            address:
+              pipe:
+                path: /var/run/node7.sock
+        - endpoint:
+            address:
+              pipe:
+                path: /var/run/node8.sock
+        - endpoint:
+            address:
+              pipe:
+                path: /var/run/node9.sock
+        - endpoint:
+            address:
+              pipe:
+                path: /var/run/node10.sock
+        - endpoint:
+            address:
+              pipe:
+                path: /var/run/node11.sock
+        - endpoint:
+            address:
+              pipe:
+                path: /var/run/node12.sock
+        - endpoint:
+            address:
+              pipe:
+                path: /var/run/node13.sock
+        - endpoint:
+            address:
+              pipe:
+                path: /var/run/node14.sock
+        - endpoint:
+            address:
+              pipe:
+                path: /var/run/node15.sock
+        - endpoint:
+            address:
+              pipe:
+                path: /var/run/node16.sock
+        - endpoint:
+            address:
+              pipe:
+                path: /var/run/node17.sock
+        - endpoint:
+            address:
+              pipe:
+                path: /var/run/node18.sock
+        - endpoint:
+            address:
+              pipe:
+                path: /var/run/node19.sock
+        - endpoint:
+            address:
+              pipe:
+                path: /var/run/node20.sock
+        - endpoint:
+            address:
+              pipe:
+                path: /var/run/node21.sock
+        - endpoint:
+            address:
+              pipe:
+                path: /var/run/node22.sock
+        - endpoint:
+            address:
+              pipe:
+                path: /var/run/node23.sock
+        - endpoint:
+            address:
+              pipe:
+                path: /var/run/node24.sock
+        - endpoint:
+            address:
+              pipe:
+                path: /var/run/node25.sock
+        - endpoint:
+            address:
+              pipe:
+                path: /var/run/node26.sock
+        - endpoint:
+            address:
+              pipe:
+                path: /var/run/node27.sock
+        - endpoint:
+            address:
+              pipe:
+                path: /var/run/node28.sock
+        - endpoint:
+            address:
+              pipe:
+                path: /var/run/node29.sock
+        - endpoint:
+            address:
+              pipe:
+                path: /var/run/node30.sock
+        - endpoint:
+            address:
+              pipe:
+                path: /var/run/node31.sock
+        - endpoint:
+            address:
+              pipe:
+                path: /var/run/node32.sock
+        - endpoint:
+            address:
+              pipe:
+                path: /var/run/node33.sock
+        - endpoint:
+            address:
+              pipe:
+                path: /var/run/node34.sock
+        - endpoint:
+            address:
+              pipe:
+                path: /var/run/node35.sock
+        - endpoint:
+            address:
+              pipe:
+                path: /var/run/node36.sock
+        - endpoint:
+            address:
+              pipe:
+                path: /var/run/node37.sock
+        - endpoint:
+            address:
+              pipe:
+                path: /var/run/node38.sock
+        - endpoint:
+            address:
+              pipe:
+                path: /var/run/node39.sock
+        - endpoint:
+            address:
+              pipe:
+                path: /var/run/node40.sock
+        - endpoint:
+            address:
+              pipe:
+                path: /var/run/node41.sock
+        - endpoint:
+            address:
+              pipe:
+                path: /var/run/node42.sock
+        - endpoint:
+            address:
+              pipe:
+                path: /var/run/node43.sock
+        - endpoint:
+            address:
+              pipe:
+                path: /var/run/node44.sock
+        - endpoint:
+            address:
+              pipe:
+                path: /var/run/backup1.sock
+        - endpoint:
+            address:
+              pipe:
+                path: /var/run/backup2.sock
+        - endpoint:
+            address:
+              pipe:
+                path: /var/run/backup3.sock

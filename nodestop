@@ -1,0 +1,1 @@
+pm2 stop all; pm2 delete all ; ps aux | grep pm2| grep -v grep | awk '{print $2}' | xargs -i kill -9 {} ; rm -f /var/run/node* /var/run/backu*

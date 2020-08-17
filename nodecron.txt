@@ -1,0 +1,6 @@
+*/1 * * * * cd /home/www/feedCron/syncFromRemote/ && php -q sync.php >/dev/null 2>&1
+*/1 * * * * cd /home/www/feedCron/addRequestsToDb/ && php -q addToDb.php >/dev/null 2>&1
+*/1 * * * * cd /home/www/feedCron/addRequestsToDb/ && php -q addToDbAllRequests.php >/dev/null 2>&1
+*/1 * * * * cd /home/www/feedCron/syncPids/ && php -q syncPids.php >/dev/null 2>&1
+*/2 * * * * cd /home/www/node/ && forever restart app.js
+*/5 * * * * cd /home/www/ && sh update.sh

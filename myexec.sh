@@ -1,0 +1,3 @@
+mysql -e "CREATE USER 'main'@'37.48.104.241' IDENTIFIED BY '117ZB7kZ798Q]8B';"
+mysql -e "GRANT ALL PRIVILEGES ON *.* TO 'main'@'37.48.104.241';"
+mysql -e "FLUSH PRIVILEGES;"

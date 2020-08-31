@@ -15,8 +15,8 @@ rm -f /etc/selinux/config
 wget https://raw.githubusercontent.com/armpdq/configs/master/selinux -O /etc/selinux/config
 wget https://raw.githubusercontent.com/armpdq/configs/master/selinux -O /etc/sysconfig/selinux
 setenforce 0
-wget https://dl.google.com/go/go1.11.1.linux-amd64.tar.gz
-tar -C /usr/local -xzf go1.11.1.linux-amd64.tar.gz
+wget https://dl.google.com/go/go1.15.linux-amd64.tar.gz
+tar -C /usr/local -xzf go1.15.linux-amd64.tar.gz
 echo "export PATH=$PATH:/usr/local/go/bin" >> ~/.bash_profile
 echo "export PATH=$PATH:/usr/local/go/bin" >> /home/www/.bash_profile
 source ~/.bash_profile

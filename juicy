@@ -52,6 +52,7 @@ systemctl enable php-fpm.service; systemctl start php-fpm.service
 rpm -Uvh http://rpms.remirepo.net/enterprise/remi-release-7.rpm
 ln -s /usr/share/phpMyAdmin /home/public_html/jcmin
 chown -R nginx:nginx /etc/phpMyAdmin/
+mkdir /var/lib/phpMyAdmin/temp/
 chown -R nginx:nginx /var/lib/phpMyAdmin/temp/
 chown -R nginx:nginx /var/lib/phpMyAdmin/upload/
 wget --no-check-certificate https://raw.githubusercontent.com/skurudo/phpmyadmin-fixer/master/pma-centos.sh && chmod +x pma-centos.sh && ./pma-centos.sh

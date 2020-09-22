@@ -40,7 +40,7 @@ yum install epel-release -y
 yum install openssl openssl-devel gcc make gcc-c++ libXpm-devel libedit-devel enchant-devel recode-devel libtidy-devel libzip-devel libxml2-devel gd-devel libzip5 libmcrypt-devel libc-client gd-last enca httpd httpd-devel autoconf automake -y
 
 rpm -Uvh https://rpms.remirepo.net/enterprise/remi-release-7.rpm
-yum-config-manager --enable remi-php70
+yum-config-manager --enable remi-php74
 yum install -y php-composer-ca-bundle
 yum install php php-pear -y
 

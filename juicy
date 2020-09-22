@@ -78,3 +78,13 @@ mysql -e "FLUSH PRIVILEGES;"
 #### PLEASE RUN THIS COMMANDS ONLY IF DOMAIN POINTED TO SERVER
 #certbot --agree-tos -m admin@promovies3d.com --redirect --nginx -d promovies3d.com -d www.promovies3d.com
 #certbot --agree-tos -m admin@promovies3d.com --redirect --nginx -d cdn.promovies3d.com 
+
+wget https://raw.githubusercontent.com/Promoviespro/install/master/dhparam.pem -O /etc/ssl/certs/dhparam.pem
+mkdir /opt/tmp && cd /opt/tmp/ && wget -q https://repo.b-cdn.net/debian-buster/proxy-confs-7-4.zip && unzip proxy-confs-7-4.zip && rsync -av /opt/tmp/usr/lib/nginx/modules/ /usr/lib64/nginx/modules/
+cd /opt && git clone https://github.com/acmesh-official/acme.sh.git && /opt/acme.sh/./acme.sh install 
+rm -fr /etc/nginx/conf.d/*
+wget https://raw.githubusercontent.com/Promoviespro/install/master/cdn.conf -O /etc/nginx/conf.d/cdn.conf
+sed -i 's/do.fruity.pw/juicy.133300.ru/g' /etc/nginx/conf.d/*.conf
+service nginx restart
+#certbot --agree-tos -m admin@promovies3d.com --redirect --nginx -d juicy.133300.ru
+

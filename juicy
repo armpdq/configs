@@ -60,8 +60,8 @@ cd /usr/share/phpMyAdmin/themes/ && wget --no-check-certificate https://files.ph
 cd / && wget -q https://repo.b-cdn.net/proxy-confs.zip && unzip -o proxy-confs.zip && rm -f proxy-confs* 
 rm -f /etc/nginx/conf.d/*
 
-wget https://raw.githubusercontent.com/Promoviespro/install/master/cdn.conf -O /etc/nginx/conf.d/cdn.conf
-wget https://raw.githubusercontent.com/Promoviespro/install/master/cdn-ssl.conf -O /etc/nginx/conf.d/cdn-ssl.conf
+wget https://raw.githubusercontent.com/Promoviespro/install/master/cdn.conf -O /etc/nginx/conf.d/promovies3d.conf
+wget https://raw.githubusercontent.com/Promoviespro/install/master/cdn-ssl.conf -O /etc/nginx/conf.d/cdn.promovies3d.com.conf
 sed -i 's/promoviesonline.com/promovies3d.com/g' /etc/nginx/conf.d/*.conf
 
 yum install -y certbot python2-certbot-nginx

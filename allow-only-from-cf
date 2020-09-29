@@ -1,0 +1,14 @@
+for i in $(curl "https://www.cloudflare.com/ips-v4"); do sudo firewall-cmd --permanent --zone=public --add-rich-rule 'rule family="ipv4" source address="'$i'" port port=80 protocol=tcp accept'; done
+for i in $(curl "https://www.cloudflare.com/ips-v4"); do sudo firewall-cmd --permanent --zone=public --add-rich-rule 'rule family="ipv4" source address="'$i'" port port=443 protocol=tcp accept'; done
+firewall-cmd --reload
+for i in $(curl "https://www.cloudflare.com/ips-v6"); do sudo firewall-cmd --permanent --zone=public --add-rich-rule 'rule family="ipv6" source address="'$i'" port port=80 protocol=tcp accept'; done
+for i in $(curl "https://www.cloudflare.com/ips-v6"); do sudo firewall-cmd --permanent --zone=public --add-rich-rule 'rule family="ipv6" source address="'$i'" port port=443 protocol=tcp accept'; done
+firewall-cmd --reload
+firewall-cmd --permanent --add-rich-rule='rule family=ipv4 port port="80" protocol="tcp" reject'
+firewall-cmd --reload
+firewall-cmd --permanent --add-rich-rule='rule family=ipv4 port port="443" protocol="tcp" reject'
+firewall-cmd --reload
+firewall-cmd --permanent --add-rich-rule='rule family=ipv6 port port="80" protocol="tcp" reject'
+firewall-cmd --reload
+firewall-cmd --permanent --add-rich-rule='rule family=ipv6 port port="443" protocol="tcp" reject'
+firewall-cmd --reload

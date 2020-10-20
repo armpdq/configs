@@ -1,0 +1,6 @@
+#!/bin/bash
+echo "$1" > /root/current
+wget -q -O /etc/apt/trusted.gpg.d/flussonic.gpg http://apt.flussonic.com/binary/gpg.key
+rm -f /etc/apt/sources.list.d/flussonic.list
+cp /etc/apt/sources.list.d/flussonic.list /opt/
+echo 'deb http://apt.flussonic.com/repo $1/' > /etc/apt/sources.list.d/flussonic.list 

@@ -1,0 +1,6 @@
+#!/bin/bash
+echo "$1" > /root/current
+echo 'deb http://apt.flussonic.com/repo $1/' > /etc/apt/sources.list.d/flussonic.list 
+apt update 
+apt install -y flussonic 
+service flussonic restart

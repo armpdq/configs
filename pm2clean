@@ -1,0 +1,1 @@
+find /home/ubuntu/.pm2/logs/ -type f -mtime +2 -exec rm -f {} \;

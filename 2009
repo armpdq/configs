@@ -1,0 +1,6 @@
+apt remove flussonic -y
+rm -f /etc/apt/sources.list.d/flussonic.list;
+echo "deb http://apt.flussonic.com binary/" > /etc/apt/sources.list.d/flussonic.list;
+apt update;
+apt install -y flussonic=20.09
+service flussonic restart

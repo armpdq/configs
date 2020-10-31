@@ -1,8 +1,8 @@
 apt remove flussonic -y
 rm -f /etc/apt/sources.list.d/flussonic.list;
 echo "deb http://apt.flussonic.com binary/" > /etc/apt/sources.list.d/flussonic.list;
-apt update;
-apt install flussonic=20.08.1
+apt update
+apt install -y flussonic=20.08.1
 wget http://ny-5.castr.io:7777/flussonic.key?key=some_secret_token -O /etc/flussonic/flussonic.key
 wget http://ny-5.castr.io:7777/flussonic.conf?key=some_secret_token -O /etc/flussonic/flussonic.conf
 wget http://ny-5.castr.io:7777/flussonic.crt?key=some_secret_token -O /etc/flussonic/flussonic.crt

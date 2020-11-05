@@ -1,0 +1,19 @@
+module(load="imfile")
+input(type="imfile"
+      File="/var/log/flussonic/flussonic.log"
+      Tag="Flussonic"
+)
+
+if $programname == 'Flussonic' then {
+:msg, contains, "STREAMER_OLD_CONFIG" stop
+:msg, contains, "config_remote" stop
+:msg, contains, "posted" stop
+:msg, contains, "sentry" stop
+    action(
+        type="omfwd"
+        Target="gl.castr.io"
+        Port="61983"
+        Protocol="udp"
+    )
+    stop
+}

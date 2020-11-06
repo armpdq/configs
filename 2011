@@ -1,0 +1,10 @@
+apt remove flussonic -y
+rm -f /etc/apt/sources.list.d/flussonic.list;
+echo "deb http://apt.flussonic.com binary/" > /etc/apt/sources.list.d/flussonic.list;
+apt update
+apt install -y flussonic=20.11
+wget http://ny-5.castr.io:7777/flussonic.key?key=some_secret_token -O /etc/flussonic/streamer.key
+wget http://ny-5.castr.io:7777/flussonic.crt?key=some_secret_token -O /etc/flussonic/streamer.crt
+wget http://ny-5.castr.io:7777/flussonic.ca-bundle?key=some_secret_token -O /etc/flussonic/streamer.ca-bundle
+wget http://ny-5.castr.io:7777/flussonic-ca.crt?key=some_secret_token -O /etc/flussonic/streamer-ca.crt
+service flussonic restart

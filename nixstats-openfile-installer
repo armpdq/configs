@@ -1,0 +1,11 @@
+wget https://raw.githubusercontent.com/armpdq/configs/master/open-files.py -O /usr/local/lib/python3.6/dist-packages/nixstatsagent/plugins/open-files.py
+mkdir /etc/nixstats
+wget https://raw.githubusercontent.com/armpdq/configs/master/open_files.sh -O /etc/nixstats/open_files.sh
+crontab -l > /root/mycron
+echo '*/5 * * * * /etc/nixstats/open_files.sh' >> /root/mycron
+crontab /root/mycron
+rm -f /root/mycron
+echo '[open-files]' >> /etc/nixstats.ini
+echo 'enabled = yes' >> /etc/nixstats.ini
+bash /etc/nixstats/open_files.sh
+systemctl restart nixstatsagent.service 

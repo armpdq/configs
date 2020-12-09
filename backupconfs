@@ -1,0 +1,7 @@
+#!/bin/bash
+echo "cleaning up backup folder for the files older then 90 days" 
+find /backup/confs -mtime +90 -exec rm -f {} \;
+
+date=$(date +"%Y%m%d-%H:%M")
+
+cp -f /etc/flussonic/flussonic.conf /backup/confs/$date.conf

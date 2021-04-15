@@ -1,0 +1,14 @@
+#!/bin/bash
+
+dt=`date +%d-%m-%Y`
+dtm=`date +%d-%m-%Y--%H`
+
+
+hs=`hostname`
+mkdir -p /opt/backup/$hs/$dt
+cp /etc/flussonic/flussonic.conf /opt/backup/$hs/$dt/$dtm
+echo "copied"
+sleep 3
+cd /opt/backup/ && aws s3 sync . s3://flussonic
+
+echo "synced"

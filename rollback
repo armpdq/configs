@@ -1,0 +1,1 @@
+dpkg -l | grep fluss | awk '{print $2}' | xargs -i apt remove -y {} ; apt install flussonic-erlang=22.3.7 flussonic-transcoder-base=20.11.6 flussonic=21.02 ; systemctl enable flussonic ; apt install flussonic-transcoder -y ; systemctl restart flussonic ; systemctl status flussonic | grep Active

@@ -1,0 +1,10 @@
+#!/bin/sh
+dd=`date +%d-%m-%Y--%H:%M`
+echo $dd
+if ps -ef | grep -v grep | grep aws ; then
+        exit 0
+else
+#cd /recordings && /usr/local/bin/aws s3 sync . s3://castr-vod-assets --exclude '*/*/*.mp4.tmp.*' ; printf "synced at $dd \n" > /root/synced
+cd /recordings && /usr/local/bin/aws s3 mv . s3://castr-vod-assets --recursive --exclude '*' --include '*.mp4' ; printf "synced at $dd \n" > /root/synced
+        exit 0
+fi

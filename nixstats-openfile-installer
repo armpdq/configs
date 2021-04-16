@@ -1,4 +1,11 @@
-wget https://raw.githubusercontent.com/armpdq/configs/master/open-files.py -O /usr/local/lib/python3.6/dist-packages/nixstatsagent/plugins/open-files.py
+#!/bin/bash
+if [ $(lsb_release -cs) = "focal" ];
+then 
+wget https://raw.githubusercontent.com/armpdq/configs/master/open-files.py -O /usr/local/lib/python3.8/dist-packages/nixstatsagent/plugins/open-files.py; 
+else 
+wget https://raw.githubusercontent.com/armpdq/configs/master/open-files.py -O /usr/local/lib/python3.6/dist-packages/nixstatsagent/plugins/open-files.py;
+fi
+
 mkdir /etc/nixstats
 wget https://raw.githubusercontent.com/armpdq/configs/master/open_files.sh -O /etc/nixstats/open_files.sh
 crontab -l > /root/mycron

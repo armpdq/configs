@@ -1,5 +1,9 @@
+yum erase epel-release -y
+yum erase httpd httpd-* -y
+yum install epel-release -y
+yum update -y
+yum install httpd -y
 cd /etc/yum.repos.d && wget https://repo.codeit.guru/codeit.el`rpm -q --qf "%{VERSION}" $(rpm -q --whatprovides redhat-release)`.repo
 yum update -y
-yum install httpd httpd-devel -y
 systemctl enable httpd
 systemctl restart httpd

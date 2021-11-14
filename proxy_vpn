@@ -1,0 +1,62 @@
+#! /bin/sh /etc/rc.common
+
+# Modified from https://github.com/darkk/redsocks#iptables-example
+# Tested on OpenWRT 18.06, TP-LINK Archer C7 v2.0, redsocks 0.4
+# Prereq: opkg install redsocks
+
+START=91
+REDSOCKS_PORT=37419
+
+start () {
+    # Redsocks should be running already, but just in case...
+    /etc/init.d/redsocks start
+
+    #
+    # Set up iptables
+    #
+
+    echo "Routing traffic to redsocks on port $REDSOCKS_PORT"
+
+    #
+    # Create the chain of rules to send non-local traffic through redsocks
+    #
+
+    iptables -t nat -N REDSOCKS
+
+    # Don't proxy local or private traffic
+    iptables -t nat -A REDSOCKS -d 0.0.0.0/8 -j RETURN
+    iptables -t nat -A REDSOCKS -d 127.0.0.0/8 -j RETURN
+    iptables -t nat -A REDSOCKS -d 10.0.0.0/8 -j RETURN
+    iptables -t nat -A REDSOCKS -d 169.254.0.0/16 -j RETURN
+    iptables -t nat -A REDSOCKS -d 172.16.0.0/12 -j RETURN
+    iptables -t nat -A REDSOCKS -d 192.168.0.0/16 -j RETURN
+    iptables -t nat -A REDSOCKS -d 224.0.0.0/4 -j RETURN
+    iptables -t nat -A REDSOCKS -d 240.0.0.0/4 -j RETURN
+
+    # Send everything else through the redsocks daemon
+    iptables -t nat -A REDSOCKS -p tcp -j REDIRECT --to-ports $REDSOCKS_PORT
+
+
+    #
+    # Jump to the REDSOCKS chain if packet is going out on wlan (to phone)
+    #
+
+    iptables -t nat -A PREROUTING -i br-lan -p tcp -j REDSOCKS
+    # XXX It seems that OUTPUT is too late?
+    #iptables -t nat -A OUTPUT -o wlan0 -p tcp -j REDSOCKS
+}
+
+stop () {
+    iptables -t nat -F REDSOCKS
+    iptables -t nat -F PREROUTING
+    iptables -t nat -F POSTROUTING
+    iptables -F INPUT
+    iptables -F FORWARD
+    iptables -t nat -X REDSOCKS
+    /etc/init.d/firewall restart
+}
+
+restart () {
+    stop
+    start
+}

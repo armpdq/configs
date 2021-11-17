@@ -17,3 +17,4 @@ sed -i "s/REMOTELOGIN/$3/g" /etc/redsocks.conf
 sed -i "s/REMOTEPASS/$4/g" /etc/redsocks.conf
 sed -i "s/nameOFhost/$5/g" /etc/config/system
 sed -i "s/WIFIname/$6/g" /etc/config/wireless
+reboot

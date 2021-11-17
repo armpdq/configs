@@ -1,28 +1,11 @@
-#! /bin/sh /etc/rc.common
-
-# Modified from https://github.com/darkk/redsocks#iptables-example
-# Tested on OpenWRT 18.06, TP-LINK Archer C7 v2.0, redsocks 0.4
-# Prereq: opkg install redsocks
-
+#!/bin/sh /etc/rc.common
 START=91
-REDSOCKS_PORT=37419
+REDSOCKS_PORT=12345
 
 start () {
-    # Redsocks should be running already, but just in case...
     /etc/init.d/redsocks start
-
-    #
-    # Set up iptables
-    #
-
     echo "Routing traffic to redsocks on port $REDSOCKS_PORT"
-
-    #
-    # Create the chain of rules to send non-local traffic through redsocks
-    #
-
     iptables -t nat -N REDSOCKS
-
     # Don't proxy local or private traffic
     iptables -t nat -A REDSOCKS -d 0.0.0.0/8 -j RETURN
     iptables -t nat -A REDSOCKS -d 127.0.0.0/8 -j RETURN
@@ -35,11 +18,6 @@ start () {
 
     # Send everything else through the redsocks daemon
     iptables -t nat -A REDSOCKS -p tcp -j REDIRECT --to-ports $REDSOCKS_PORT
-
-
-    #
-    # Jump to the REDSOCKS chain if packet is going out on wlan (to phone)
-    #
 
     iptables -t nat -A PREROUTING -i br-lan -p tcp -j REDSOCKS
     # XXX It seems that OUTPUT is too late?

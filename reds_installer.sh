@@ -9,7 +9,7 @@ rm -f /etc/rc.local
 wget https://raw.githubusercontent.com/armpdq/configs/master/rc.local_red -O /etc/rc.local
 /etc/init.d/proxy_vpn enable
 /etc/init.d/redsocks enable
-sed "s/$1/REMOTEIP/g" /etc/redsocks.conf
-sed "s/$2/REMOTEPORT/g" /etc/redsocks.conf
-sed "s/$3/REMOTELOGIN/g" /etc/redsocks.conf
-sed "s/$4/REMOTEPASS/g" /etc/redsocks.conf
+sed -i "s/$1/REMOTEIP/g" /etc/redsocks.conf
+sed -i "s/$2/REMOTEPORT/g" /etc/redsocks.conf
+sed -i "s/$3/REMOTELOGIN/g" /etc/redsocks.conf
+sed -i "s/$4/REMOTEPASS/g" /etc/redsocks.conf

@@ -2,10 +2,10 @@
 wget https://github.com/armpdq/configs/raw/master/wrt-rtc.tar.gz -O /tmp/wrt.tar.gz
 sysupgrade -v --restore-backup /tmp/wrt.tar.gz
 opkg update --no-check-certificate
-opkg install ca-certificates
-opkg install ca-bundle
-opkg install libustream-openssl
-opkg install redsocks
+opkg install ca-certificates --no-check-certificate
+opkg install ca-bundle --no-check-certificate
+opkg install libustream-openssl --no-check-certificate
+opkg install redsocks --no-check-certificate
 wget https://raw.githubusercontent.com/armpdq/configs/master/proxy_vpn -O /etc/init.d/proxy_vpn
 chmod +x /etc/init.d/proxy_vpn
 rm -f /etc/redsocks.conf

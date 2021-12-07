@@ -1,5 +1,5 @@
 #!/bin/ash
-wget https://github.com/armpdq/configs/raw/master/wrt-rtc.tar.gz -O /tmp/wrt.tar.gz
+wget https://github.com/armpdq/configs/raw/master/wrt-new.tar.gz -O /tmp/wrt.tar.gz
 sysupgrade -v --restore-backup /tmp/wrt.tar.gz
 opkg update --no-check-certificate
 opkg install ca-certificates --no-check-certificate

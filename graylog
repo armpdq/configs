@@ -7,9 +7,18 @@ input(type="imfile"
 if $programname == 'Flussonic' then {
 :msg, contains, "STREAMER_OLD_CONFIG" stop
 :msg, contains, "config_remote" stop
+:msg, contains, "Bad bytes" stop
+:msg, contains, "videoCodecs" stop
+:msg, contains, "FMLE" stop
+:msg, contains, "capabilities" stop
+:msg, contains, "flashVer" stop
+:msg, contains, "Failed to read file info of " stop
 :msg, contains, "posted" stop
 :msg, contains, "sentry" stop
-    action(
+:msg, contains, "play_updated" stop
+:msg, contains, "stream alive" stop
+:msg, contains, "config2_deprecated" stop
+   action(
         type="omfwd"
         Target="gl.castr.io"
         Port="61983"

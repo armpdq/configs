@@ -1,0 +1,22 @@
+[tcp01]
+user = www
+group = www
+listen = 127.0.0.1:9000
+listen.allowed_clients = 127.0.0.1
+
+pm = dynamic
+pm.max_children = 1000
+pm.start_servers = 1000
+pm.min_spare_servers = 1000
+pm.max_spare_servers = 1000
+pm.max_requests = 50000
+slowlog = /home/www/logs/php-fpm/www-slow.log
+php_admin_value[error_log] = /home/www/logs/php-fpm/www-error.log
+php_admin_flag[log_errors] = on
+php_value[session.save_handler] = files
+php_value[session.save_path]    = /home/www/session
+php_value[soap.wsdl_cache_dir]  = /var/lib/php/wsdlcache
+php_flag[expose_php] = off
+request_slowlog_timeout = 5s
+pm.status_path = /status
+ping.path = /ping

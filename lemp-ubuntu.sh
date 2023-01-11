@@ -24,7 +24,6 @@ wget https://raw.githubusercontent.com/armpdq/configs/master/mod-http-geoip.conf
 wget https://raw.githubusercontent.com/armpdq/configs/master/www.conf -O /etc/nginx/conf.d/www.conf
 wget https://raw.githubusercontent.com/armpdq/configs/master/phpstatus.conf -O /etc/nginx/phpstatus.conf
 wget https://raw.githubusercontent.com/armpdq/configs/master/origin.conf -O /etc/nginx/origin.conf
-mkdir -p /usr/share/GeoIP/
 wget https://mailfud.org/geoip-legacy/GeoIP.dat.gz -O /usr/share/GeoIP/GeoIP.dat.gz
 gunzip /usr/share/GeoIP/GeoIP.dat.gz
 add-apt-repository ppa:ondrej/php -y

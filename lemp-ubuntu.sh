@@ -28,7 +28,7 @@ mkdir -p /usr/share/GeoIP/
 wget https://mailfud.org/geoip-legacy/GeoIP.dat.gz -O /usr/share/GeoIP/GeoIP.dat.gz
 gunzip /usr/share/GeoIP/GeoIP.dat.gz
 add-apt-repository ppa:ondrej/php -y
-apt install -y php8.0 php8.0-cli php8.0-common php8.0-fpm php8.0-mysql php8.0-opcache php8.0-readline php8.0-zip php8.0-redis php8.0-zip mysql-server
+apt install -y php8.0 php8.0-cli php8.0-common php8.0-fpm php8.0-mysql php8.0-opcache php8.0-readline php8.0-zip php8.0-redis php8.0-zip php8.0-curl php8.0-xml php8.0-imagick php8.0-gd php8.0-mbstring mysql-server
 php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
 php composer-setup.php
 php -r "unlink('composer-setup.php');"

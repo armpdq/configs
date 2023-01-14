@@ -8,7 +8,7 @@ wget https://raw.githubusercontent.com/armpdq/configs/master/limits.conf -O /etc
 rm -f /etc/sysctl.conf
 wget https://raw.githubusercontent.com/armpdq/configs/master/sysctl.conf -O /etc/sysctl.conf
 sysctl -p
-apt install -y curl gnupg2 ca-certificates lsb-release software-properties-common whois net-tools htop atop unzip
+apt install -y rar unrar python3-pip curl gnupg2 ca-certificates lsb-release software-properties-common whois net-tools htop atop unzip
 echo "deb http://nginx.org/packages/ubuntu `lsb_release -cs` nginx" | tee /etc/apt/sources.list.d/nginx.list
 curl -fsSL https://nginx.org/keys/nginx_signing.key | apt-key add -
 apt update

@@ -1,0 +1,1 @@
+apt remove flussonic flussonic-* -y; apt install flussonic=24.08 flussonic-erlang=26.1.2.13 flussonic-transcoder-base=24.06.4 flussonic-transcoder=24.06.4; systemctl restart flussonic

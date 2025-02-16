@@ -1,0 +1,1 @@
+apt update ; apt install --only-upgrade flussonic -y ; systemctl restart flussonic

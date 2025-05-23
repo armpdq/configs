@@ -8,7 +8,7 @@ wget https://raw.githubusercontent.com/armpdq/configs/master/limits.conf -O /etc
 rm -f /etc/sysctl.conf
 wget https://raw.githubusercontent.com/armpdq/configs/master/sysctl.conf -O /etc/sysctl.conf
 sysctl -p
-apt install -y rar unrar python3-pip curl gnupg2 ca-certificates lsb-release software-properties-common whois net-tools htop atop unzip
+apt install -y rar unrar python3-pip curl gnupg2 ca-certificates lsb-release software-properties-common whois net-tools htop atop unzip zip
 echo "deb http://nginx.org/packages/ubuntu `lsb_release -cs` nginx" | tee /etc/apt/sources.list.d/nginx.list
 curl -fsSL https://nginx.org/keys/nginx_signing.key | apt-key add -
 apt update
@@ -27,14 +27,14 @@ wget https://raw.githubusercontent.com/armpdq/configs/master/origin.conf -O /etc
 wget https://mailfud.org/geoip-legacy/GeoIP.dat.gz -O /usr/share/GeoIP/GeoIP.dat.gz
 gunzip /usr/share/GeoIP/GeoIP.dat.gz
 add-apt-repository ppa:ondrej/php -y
-apt install -y php8.0 php8.0-cli php8.0-common php8.0-fpm php8.0-mysql php8.0-opcache php8.0-readline php8.0-zip php8.0-redis php8.0-zip php8.0-curl php8.0-xml php8.0-imagick php8.0-gd php8.0-mbstring mysql-server
+apt install -y php8.3 php8.3-cli php8.3-common php8.3-fpm php8.3-mysql php8.3-opcache php8.3-readline php8.3-zip php8.3-redis php8.3-zip php8.3-curl php8.3-xml php8.3-imagick php8.3-gd php8.3-mbstring mysql-server
 php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
 php composer-setup.php
 php -r "unlink('composer-setup.php');"
 mv composer.phar /usr/local/bin/composer
-rm -f /etc/php/8.0/fpm/pool.d/www.conf
-wget https://raw.githubusercontent.com/armpdq/configs/master/php-fpm/www.conf-ubuntu -O /etc/php/8.0/fpm/pool.d/www.conf
-systemctl enable php8.0-fpm mysql
+rm -f /etc/php/8.3/fpm/pool.d/www.conf
+wget https://raw.githubusercontent.com/armpdq/configs/master/php-fpm/www.conf-ubuntu -O /etc/php/8.3/fpm/pool.d/www.conf
+systemctl enable php8.3-fpm mysql
 curl -fsSL https://deb.nodesource.com/setup_16.x | sudo -E bash -
 apt-get install -y nodejs 
 npm i -g pm2 forever gulp

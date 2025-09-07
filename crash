@@ -1,0 +1,44 @@
+#!/bin/bash
+
+echo "=== SYSTEM REBOOT DIAGNOSTIC SCRIPT ==="
+
+echo ""
+echo "➤ Uptime:"
+uptime
+
+echo ""
+echo "➤ Last 5 Reboots:"
+last -x | grep reboot | head -n 5
+
+# Get last reboot time
+last_reboot=$(last -x | grep reboot | head -n 1 | awk '{print $5, $6, $7, $8}')
+echo ""
+echo "➤ Analyzing logs around last reboot: $last_reboot"
+echo ""
+
+echo "➤ Possible shutdown causes before reboot:"
+journalctl --since "$last_reboot" --until "+1min" | grep -Ei 'error|fail|panic|shutdown|reboot|power|watchdog'
+
+echo ""
+echo "➤ Systemd messages before reboot:"
+journalctl --system --since "$last_reboot" --until "+1min" | tail -n 100
+
+echo ""
+echo "➤ Kernel log before reboot (if available):"
+grep -iE 'error|fail|panic|watchdog' /var/log/kern.log | tail -n 20
+
+echo ""
+echo "➤ If crash dump exists:"
+if ls /var/crash/*.crash &>/dev/null; then
+  echo "Found crash files:"
+  ls -lh /var/crash/*.crash
+else
+  echo "No crash dumps found in /var/crash/"
+fi
+
+echo ""
+echo "➤ If OOM (Out Of Memory) events occurred:"
+dmesg | grep -i 'oom' | tail -n 10
+
+echo ""
+echo "=== END OF DIAGNOSTICS ==="

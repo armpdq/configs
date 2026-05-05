@@ -44,3 +44,36 @@ sudo env PATH=$PATH:/usr/bin /usr/lib/node_modules/pm2/bin/pm2 startup systemd -
 cat /etc/sudoers | grep -v NOPASSWD > /opt/sudoers 
 rm -f /etc/sudoers
 mv /opt/sudoers /etc/sudoers
+
+SSH_USER="www"
+MYSQL_USER="www"
+MYSQL_HOST="localhost"
+MYSQL_HOST2="127.0.0.1"
+
+# Generate 16-character password: letters + digits only
+PASSWORD="$(tr -dc 'A-Za-z0-9' < /dev/urandom | head -c 16)"
+
+if ! id "$SSH_USER" >/dev/null 2>&1; then
+  echo "Error: Linux user '$SSH_USER' does not exist"
+  exit 1
+fi
+
+# Apply password to Linux/SSH user
+echo "${SSH_USER}:${PASSWORD}" | chpasswd
+
+# Create/update MySQL user and grant access to all databases
+mysql <<SQL
+CREATE USER IF NOT EXISTS '${MYSQL_USER}'@'${MYSQL_HOST}' IDENTIFIED BY '${PASSWORD}';
+CREATE USER IF NOT EXISTS '${MYSQL_USER}'@'${MYSQL_HOST2}' IDENTIFIED BY '${PASSWORD}';
+ALTER USER '${MYSQL_USER}'@'${MYSQL_HOST}' IDENTIFIED BY '${PASSWORD}';
+ALTER USER '${MYSQL_USER}'@'${MYSQL_HOST2}' IDENTIFIED BY '${PASSWORD}';
+GRANT ALL PRIVILEGES ON *.* TO '${MYSQL_USER}'@'${MYSQL_HOST}' WITH GRANT OPTION;
+GRANT ALL PRIVILEGES ON *.* TO '${MYSQL_USER}'@'${MYSQL_HOST2}' WITH GRANT OPTION;
+FLUSH PRIVILEGES;
+SQL
+
+echo
+echo "Password applied successfully."
+echo "User: ${SSH_USER}"
+echo "MySQL user: ${MYSQL_USER}@${MYSQL_HOST}"
+echo "Generated password: ${PASSWORD}"
